@@ -33,14 +33,12 @@ exports.getSweet = async (req, res) => {
   }
 };
 
-
-
 exports.editSweet = async (req, res) => {
   try {
     const { name, category, price, quantity } = req.body;
 
     const sweet = await Sweet.findOneAndUpdate(
-      { id: Number(req.params.id) }, 
+      { id: Number(req.params.id) },
       { name, category, price, quantity },
       { new: true }
     );
@@ -50,30 +48,31 @@ exports.editSweet = async (req, res) => {
     }
 
     res.status(200).json({ message: sweet });
-   
-
   } catch (error) {
     console.error("Edit Error:", error);
     res.status(500).json({ message: "Server Error" });
   }
 };
 
-
 exports.purchaseSweet = async (req, res) => {
-  const { amount } = req.body;
+  try {
+    const { amount } = req.body;
 
-  const sweet = await Sweet.findOne({ id: req.params.id });
+    const sweet = await Sweet.findOne({ id: req.params.id });
 
-  if (!sweet) return res.status(404).json({ message: "Not found" });
-  
-  if (sweet.quantity < amount) return res.status(400).json({ message: "Insufficient stock" });
-  sweet.quantity -= amount;
-  await sweet.save();
+    if (!sweet) return res.status(404).json({ message: "Not found" });
 
-  res.json({ message: "Purchased", sweet });
+    if (sweet.quantity < amount)
+      return res.status(400).json({ message: "Insufficient stock" });
+    sweet.quantity -= amount;
+    await sweet.save();
 
-  
+    res.json({ message: "Purchased", sweet });
+    
+  } catch (err) {
+
+     console.error("Edit Error:", error);
+    res.status(500).json({ message: "Server Error" });
+
+  }
 };
-
-
-
