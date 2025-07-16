@@ -58,3 +58,22 @@ exports.editSweet = async (req, res) => {
   }
 };
 
+
+exports.purchaseSweet = async (req, res) => {
+  const { amount } = req.body;
+
+  const sweet = await Sweet.findOne({ id: req.params.id });
+
+  if (!sweet) return res.status(404).json({ message: "Not found" });
+  
+  if (sweet.quantity < amount) return res.status(400).json({ message: "Insufficient stock" });
+  sweet.quantity -= amount;
+  await sweet.save();
+
+  res.json({ message: "Purchased", sweet });
+
+  
+};
+
+
+

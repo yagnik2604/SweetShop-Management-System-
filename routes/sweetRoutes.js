@@ -4,7 +4,8 @@ const router = express.Router();
 const {
   addSweet,
   getSweet,
-  editSweet
+  editSweet,
+  purchaseSweet
 
 } = require('../controller/controller');
 
@@ -13,6 +14,7 @@ const {
 router.post('/addSweet', addSweet);
 router.get('/', getSweet);
 router.put('/editSweet/:id', editSweet);
+router.patch('/purchase/:id', purchaseSweet);
 
 
 

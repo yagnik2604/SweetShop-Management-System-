@@ -28,7 +28,7 @@ describe("Sweet Shop API", () => {
   });
 
 
-  //test case for get all items 
+  //test case for get all items route
   it("shoud return all sweets", async () => {
     const sweets = [
       {
@@ -68,7 +68,7 @@ describe("Sweet Shop API", () => {
 
   });
 
-
+  // test case for edit route 
 it("should return updated sweet", async () => {
   await Sweet.create({
     id: 200,
@@ -93,6 +93,22 @@ console.log("STATUS:", res.statusCode);
   expect(res.statusCode).toBe(200);
    expect(res.body.message.name).toBe("Kaju");
 });
+
+// test case for purchase and reduce quantity
+ it("should purchase and reduce quantity", async () => {
+    await Sweet.create({
+      id: "1002",
+      name: "Rasgulla",
+      category: "Milk",
+      price: 10,
+      quantity: 10,
+    });
+    const res = await request(app)
+      .patch("/api/sweets/purchase/1002")
+      .send({ amount: 3 });
+    expect(res.statusCode).toBe(200);
+    expect(res.body.sweet.quantity).toBe(7);
+  });
 
 
 
