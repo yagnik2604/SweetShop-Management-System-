@@ -21,3 +21,14 @@ exports.addSweet = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
+exports.getSweet = async (req, res)=>{
+    
+    const sweets = await Sweet.find();
+    if(sweets.length === 0) return res.status(404).json({message: "not found"});
+    
+     res.status(200).json({ message: sweets });
+
+    //  res.render("index", { sweets });
+
+}
