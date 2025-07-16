@@ -36,7 +36,7 @@ exports.getSweet = async (req, res) => {
 
 
 exports.editSweet = async (req, res) => {
-  
+  try {
     const { name, category, price, quantity } = req.body;
 
     const sweet = await Sweet.findOneAndUpdate(
@@ -51,5 +51,10 @@ exports.editSweet = async (req, res) => {
 
     res.status(200).json({ message: sweet });
    
- 
+
+  } catch (error) {
+    console.error("Edit Error:", error);
+    res.status(500).json({ message: "Server Error" });
+  }
 };
+
