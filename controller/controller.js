@@ -32,3 +32,24 @@ exports.getSweet = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
+
+
+exports.editSweet = async (req, res) => {
+  
+    const { name, category, price, quantity } = req.body;
+
+    const sweet = await Sweet.findOneAndUpdate(
+      { id: Number(req.params.id) }, 
+      { name, category, price, quantity },
+      { new: true }
+    );
+
+    if (!sweet) {
+      return res.status(404).json({ message: "Sweet not found" });
+    }
+
+    res.status(200).json({ message: sweet });
+   
+ 
+};

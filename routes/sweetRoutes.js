@@ -3,7 +3,8 @@ const router = express.Router();
 
 const {
   addSweet,
-  getSweet
+  getSweet,
+  editSweet
 
 } = require('../controller/controller');
 
@@ -11,6 +12,8 @@ const {
 
 router.post('/addSweet', addSweet);
 router.get('/', getSweet);
+router.put('/editSweet/:id', editSweet);
+
 
 
 

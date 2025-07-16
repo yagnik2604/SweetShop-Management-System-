@@ -65,8 +65,34 @@ describe("Sweet Shop API", () => {
     expect(res.statusCode).toBe(200);
     expect(Array.isArray(res.body.message)).toBe(true);
     expect(res.body.message[0].name).toBe("Kaju Katli");
-    
+
   });
+
+
+it("should return updated sweet", async () => {
+  await Sweet.create({
+    id: 200,
+    name: "rashmalay",
+    category: "mithai",
+    price: 50,
+    quantity: 10,
+  });
+
+  const res = await request(app).put("/api/sweets/editSweet/200").send({
+    id: "1001",
+    name: "Kaju",
+    category: "Nut-Based",
+    price: 50, 
+    quantity: 20,
+  });
+
+console.log("STATUS:", res.statusCode);
+  console.log("BODY:", res.body);
+
+
+  expect(res.statusCode).toBe(200);
+   expect(res.body.message.name).toBe("Kaju");
+});
 
 
 
