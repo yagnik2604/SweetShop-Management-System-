@@ -59,7 +59,10 @@ exports.editSweet = async (req, res) => {
       return res.status(404).json({ message: "Sweet not found" });
     }
 
-    res.status(200).json({ message: sweet });
+    // res.status(200).json({ message: sweet });
+
+        res.redirect("/api/sweets");
+
   } catch (error) {
     console.error("Edit Error:", error);
     res.status(500).json({ message: "Server Error" });

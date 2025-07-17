@@ -47,7 +47,7 @@
               <p>Price: ₹<%= sweet.price %></p>
               <p>Quantity: <%= sweet.quantity %></p>
               <div class="d-flex justify-content-between">
-                <a href="/edit/<%= sweet._id %>" class="btn btn-sm btn-outline-primary">✏️ Edit</a>
+                <a href="/api/sweets/edit/<%= sweet._id %>" class="btn btn-sm btn-outline-primary">✏️ Edit</a>
                 <a href="/purchase/<%= sweet.id %>" class="btn btn-sm btn-outline-success">🛒 Purchase</a>
               </div>
             </div>
