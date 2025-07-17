@@ -13,26 +13,39 @@ exports.addSweet = async (req, res) => {
     const sweet = await Sweet.create({ id, name, category, price, quantity });
 
     res.status(201).json(sweet);
+     
+     
+
+
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server error" });
   }
 };
 
+
+// get all sweet controlller 
 exports.getSweet = async (req, res) => {
   try {
     const sweets = await Sweet.find();
 
     if (sweets.length === 0)
+
       return res.status(404).json({ message: "not found" });
 
-    res.status(200).json({ message: sweets });
+    // res.status(200).json({ message: sweets }); // response for test 
+  
+    res.render("index", { sweets }); // render home page with sweet data 
+
+
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server error" });
   }
 };
 
+
+// edit sweet controller 
 exports.editSweet = async (req, res) => {
   try {
     const { name, category, price, quantity } = req.body;
@@ -54,6 +67,8 @@ exports.editSweet = async (req, res) => {
   }
 };
 
+
+// purchase sweet controller 
 exports.purchaseSweet = async (req, res) => {
   try {
     const { amount } = req.body;
@@ -68,7 +83,7 @@ exports.purchaseSweet = async (req, res) => {
     await sweet.save();
 
     res.json({ message: "Purchased", sweet });
-    
+
   } catch (err) {
 
      console.error("Edit Error:", error);
