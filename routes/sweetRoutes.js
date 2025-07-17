@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Sweet = require('../models/Sweet-model')
+const Sweet = require("../models/Sweet-model");
 
 const {
   addSweet,
@@ -19,7 +19,6 @@ router.get("/add", (req, res) => {
   res.render("addSweet");
 });
 
-
 // render edit page with selected product
 router.get("/edit/:id", async (req, res) => {
   try {
@@ -32,5 +31,16 @@ router.get("/edit/:id", async (req, res) => {
 });
 
 
+// render thhe purchase page 
+router.get("/purchase/:id", async (req, res) => {
+  try {
+    const sweet = await Sweet.findOne({ id: req.params.id });
+    if (!sweet) return res.status(404).send("Sweet not found");
+    res.render("purchaseSweet", { sweet });
+  } catch (err) {
+    console.error("Edit Error:", err);
+    res.status(500).json({ message: "Server Error" });
+  }
+});
 
 module.exports = router;

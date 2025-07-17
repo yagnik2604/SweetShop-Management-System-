@@ -84,7 +84,9 @@ exports.purchaseSweet = async (req, res) => {
     sweet.quantity -= amount;
     await sweet.save();
 
-    res.json({ message: "Purchased", sweet });
+    // res.json({ message: "Purchased", sweet });
+
+     res.redirect("/api/sweets");
 
   } catch (err) {
 
