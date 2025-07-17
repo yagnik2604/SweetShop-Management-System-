@@ -17,6 +17,10 @@ router.put('/editSweet/:id', editSweet);
 router.patch('/purchase/:id', purchaseSweet);
 
 
+// renderthe addDweet ejs page 
+router.get("/add", (req, res) => {
+  res.render("addSweet");
+});
 
 
 

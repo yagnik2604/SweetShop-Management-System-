@@ -12,10 +12,9 @@ exports.addSweet = async (req, res) => {
 
     const sweet = await Sweet.create({ id, name, category, price, quantity });
 
-    res.status(201).json(sweet);
+    // res.status(201).json(sweet);
      
-     
-
+      res.redirect("/api/sweets");
 
   } catch (err) {
     console.error(err);
